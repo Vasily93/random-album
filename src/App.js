@@ -9,9 +9,9 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
 function App() {
   const [images, setImages] = useState([]);
-
   const fetchTenMoreImages = () => {
     const apiRoot = 'https://api.unsplash.com';
     const API_Key = process.env.REACT_APP_API_KEY;
@@ -25,12 +25,13 @@ function App() {
     if(images.length === 0) {
       fetchTenMoreImages()
     }
-    console.log(window.screenX)
   })
+
 
   return (
     <div className="App">
-      <Header/>
+      <Header title='Infinite Scroll'/>
+
       <Container>
         <InfiniteScroll 
           dataLength={images.length} 
@@ -51,8 +52,10 @@ function App() {
             ))}
           </ImageList>
         </InfiniteScroll>
+        {/* <AlbumModal open={open} title={albumTitle} images={album} handleClose={handleClose}/> */}
       </Container>
-      <Albums/>
+
+      <Albums />
     </div>
   );
 }
