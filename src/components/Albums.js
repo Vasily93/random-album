@@ -53,10 +53,18 @@ function Albums() {
         setAlbums(updated)
     }
 
-    const handleDelete = (e) => {
-        // albums[index].images.splice(e.target.id, 1);
-        // const updated = albums;
-        // setAlbums(updated)
+    const handleDelete = (index, id) => {
+        console.log(index, id)
+        const updatedAlbum = albums.find(alb => alb.id === id);
+        console.log(updatedAlbum)
+        updatedAlbum.images.splice(index, 1);
+        console.log(updatedAlbum)
+        const updated = albums.map(al => {
+            let album = al.id === updatedAlbum.id ?updatedAlbum : al;
+            return album;
+        })
+        setAlbums(updated)
+
     }
 
     const modal = albumId ? 
