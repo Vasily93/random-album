@@ -2,10 +2,12 @@ import './App.css';
 // import Loader from './components/Loader';
 import Header from './components/Header';
 import Albums from './components/Albums';
+import Picture from './components/Picture';
 import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Container from '@mui/material/Container';
 import {useState, useEffect} from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -29,6 +31,7 @@ function App() {
 
 
   return (
+    <DndProvider backend={HTML5Backend}>
     <div className="App">
       <Header title='Infinite Scroll'/>
 
@@ -41,22 +44,15 @@ function App() {
         >
           <ImageList sx={{ width: '100%' }} cols={4} rowHeight={500}>
             {images.map(image => (
-              <ImageListItem key={image.id} >
-                <img
-                  src={`${image.urls.thumb}?w=164&h=164&fit=crop&auto=format`}
-                  srcSet={`${image.urls.thumb}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                  alt='imagies hardocoded alt text'
-                  loading="lazy"
-                />
-              </ImageListItem>
+              <Picture  image={image} />
             ))}
           </ImageList>
         </InfiniteScroll>
-        {/* <AlbumModal open={open} title={albumTitle} images={album} handleClose={handleClose}/> */}
       </Container>
 
       <Albums />
     </div>
+    </DndProvider>
   );
 }
 

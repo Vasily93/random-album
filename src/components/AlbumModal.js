@@ -22,22 +22,22 @@ const modalstyle = {
 function AlbumModal(props) {
     const {album, open, handleClose, handleDelete, deleteAlbum} = props;
 
-    const deleteClick = (e) => {
-        album.images.splice(e.target.id, 1)
-        handleDelete(e)
-    }
+    // const deleteClick = (e) => {
+    //     album.images.splice(e.target.id, 1)
+    //     handleDelete(e)
+    // }
 return (
     <Modal
           open={open}
           onClose={handleClose}
         >
           <Box sx={modalstyle}>
-            <button id={album.name} onClick={(e) => {deleteAlbum(e)}}>Delete Album</button>
-            <h1>{album.name}</h1>
+            <button id={album.id}  onClick={(e) => {deleteAlbum(e)}}>Delete Album</button>
+            <h1>{album.title}</h1>
           <ImageList sx={{ width: '100%' }} cols={2} rowHeight={500}>
             {album.images.map((image, index) => (
               <ImageListItem >
-                  <button id={index} onClick={e => deleteClick(e)}>delete</button>
+                  {/* <button id={index} onClick={e => deleteClick(e)}>delete</button> */}
                 <img
                   src={`${image}?w=164&h=164&fit=crop&auto=format`}
                   srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
