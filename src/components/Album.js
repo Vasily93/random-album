@@ -14,7 +14,6 @@ const card = {
 }
 
 function Album({ handleAlbumClick, album, addImageToAlbum}) {
-    const [localImages, setLocalImages] = useState([]);
     const [{isOver}, drop] = useDrop(() => ({
         accept: "image",
         drop: (item) => addImageToAlbum(album.id, item.url),
@@ -23,9 +22,6 @@ function Album({ handleAlbumClick, album, addImageToAlbum}) {
         })
     }))
 
-    // const addImageToAlbum = (item) => {
-    //     setLocalImages(localImages => [...localImages, item.url])
-    // }
   return (
     <Card ref={drop} style={card} id={album.id} onClick={handleAlbumClick}>
     <Typography component="p">

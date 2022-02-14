@@ -20,8 +20,8 @@ function Albums() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
     useEffect(() => {
+        console.log(albums, 'inside useEffect')
         window.localStorage.setItem('albums', JSON.stringify(albums));
     }, [albums])
 
@@ -47,9 +47,10 @@ function Albums() {
         const updatedAlbum = albums.find(alb => alb.id === id);
         updatedAlbum.images.push(url)
         const updated = albums.map(al => {
-            let album = al.id === updatedAlbum.id ?updatedAlbum : al;
+            let album = al.id === updatedAlbum.id ? updatedAlbum : al;
             return album;
         })
+        console.log(albums, updated, 'inside addImage func')
         setAlbums(updated)
     }
 

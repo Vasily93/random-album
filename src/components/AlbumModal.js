@@ -1,7 +1,11 @@
 import React from "react";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 
@@ -32,12 +36,22 @@ return (
           onClose={handleClose}
         >
           <Box sx={modalstyle}>
-            <button id={album.id}  onClick={(e) => {deleteAlbum(e)}}>Delete Album</button>
-            <h1>{album.title}</h1>
-          <ImageList sx={{ width: '100%' }} cols={2} rowHeight={500}>
+            <Stack>
+                <h3>{album.title}</h3>
+            <Button 
+                variant='contained'
+                size='small'
+                id={album.id}
+                onClick={(e) => {deleteAlbum(e)}}
+                >Delete Album
+            </Button>
+            </Stack>
+          <ImageList sx={{ width: '100%' }} cols={3} rowHeight={700}>
             {album.images.map((image, index) => (
               <ImageListItem >
-                  <button id={index} onClick={e => deleteClick(e)}>delete</button>
+                <Button variant="contained" id={index} onClick={e => deleteClick(e)} aria-label="delete">
+                    <DeleteIcon />
+                </Button>
                 <img
                   src={`${image}?w=164&h=164&fit=crop&auto=format`}
                   srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
