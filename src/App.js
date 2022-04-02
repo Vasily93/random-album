@@ -20,7 +20,10 @@ function App() {
 
     axios
         .get(`${apiRoot}/photos/random?client_id=${API_Key}&count=10`)
-        .then(res => setImages([...images, ...res.data]))
+        .then(res => {
+          let newImages = res.data.filter(image => images.find(el => el.id === image.id) === undefined)
+          setImages([...images, ...newImages])
+        })
   }
 
   useEffect(() => {
@@ -34,15 +37,14 @@ function App() {
     <DndProvider backend={HTML5Backend}>
     <div className="App">
       <Header title='Infinite Scroll'/>
-
       <Container>
         <InfiniteScroll 
           dataLength={images.length} 
-          hasMore={images.length < 100}
+          hasMore={images.length < 60}
           loader={'Loading more Images...'}
           next={fetchTenMoreImages}  
         >
-          <ImageList sx={{ width: '100%' }} cols={4} rowHeight={500}>
+          <ImageList sx={{ width: '100%' }} cols={4} rowHeight={400}>
             {images.map((image, index) => (
               <Picture key={`key-${image.id}-${index}`}  image={image} />
             ))}
@@ -50,7 +52,7 @@ function App() {
         </InfiniteScroll>
       </Container>
 
-      <Albums />
+      {/* <Albums /> */}
     </div>
     </DndProvider>
   );
