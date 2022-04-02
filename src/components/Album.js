@@ -2,7 +2,7 @@ import React from 'react';
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 // import { useState } from 'react';
-import { useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
 const card = {
     marginTop: '10px',
@@ -14,7 +14,7 @@ const card = {
 }
 
 function Album({ handleAlbumClick, album, addImageToAlbum}) {
-    const [drop] = useDrop(() => ({
+    const [{isOver}, drop] = useDrop(() => ({
         accept: "image",
         drop: (item) => handleDrop(album.id, item.url),
         collect: (monitor) => ({
