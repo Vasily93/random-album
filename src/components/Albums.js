@@ -21,7 +21,6 @@ function Albums() {
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        console.log(albums, 'inside useEffect')
         window.localStorage.setItem('albums', JSON.stringify(albums));
     }, [albums])
 
@@ -44,22 +43,14 @@ function Albums() {
     }
 
     const addImageToAlbum = (id, url) => {
-        const updatedAlbum = albums.find(alb => alb.id === id);
-        updatedAlbum.images.push(url)
-        const updated = albums.map(al => {
-            let album = al.id === updatedAlbum.id ? updatedAlbum : al;
-            return album;
-        })
-        console.log(albums, updated, 'inside addImage func')
-        setAlbums(updated)
+        albums.find(alb => alb.id === id).images.push(url);
+        const updatedAlbs = albums
+        setAlbums(updatedAlbs)
     }
 
     const handleDelete = (index, id) => {
-        console.log(index, id)
         const updatedAlbum = albums.find(alb => alb.id === id);
-        console.log(updatedAlbum)
         updatedAlbum.images.splice(index, 1);
-        console.log(updatedAlbum)
         const updated = albums.map(al => {
             let album = al.id === updatedAlbum.id ?updatedAlbum : al;
             return album;
@@ -79,6 +70,7 @@ function Albums() {
     const albumsList = albums.length > 0 ?
         albums.map((album, index) => (
             <Album
+                key={`${index}-${album.name}`}
                 handleAlbumClick={handleAlbumClick}
                 album={album}
                 addImageToAlbum={addImageToAlbum}

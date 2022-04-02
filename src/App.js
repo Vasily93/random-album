@@ -38,13 +38,13 @@ function App() {
       <Container>
         <InfiniteScroll 
           dataLength={images.length} 
-          hasMore={images.length < 20}
+          hasMore={images.length < 100}
           loader={'Loading more Images...'}
           next={fetchTenMoreImages}  
         >
           <ImageList sx={{ width: '100%' }} cols={4} rowHeight={500}>
-            {images.map(image => (
-              <Picture  image={image} />
+            {images.map((image, index) => (
+              <Picture key={`key-${image.id}-${index}`}  image={image} />
             ))}
           </ImageList>
         </InfiniteScroll>

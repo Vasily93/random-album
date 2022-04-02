@@ -16,12 +16,14 @@ const card = {
 function Album({ handleAlbumClick, album, addImageToAlbum}) {
     const [{isOver}, drop] = useDrop(() => ({
         accept: "image",
-        drop: (item) => addImageToAlbum(album.id, item.url),
+        drop: (item) => handleDrop(album.id, item.url),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         })
     }))
-
+    const handleDrop = (id, url) => {
+        addImageToAlbum(id, url)
+    }
   return (
     <Card ref={drop} style={card} id={album.id} onClick={handleAlbumClick}>
     <Typography component="p">

@@ -13,7 +13,7 @@ function Picture({image}) {
         })
     }))
   return (
-    <ImageListItem key={id} ref={drag} sx={{ border: isDragging ? '5px solid pink': '0px'}}>
+    <ImageListItem ref={drag} sx={{ border: isDragging ? '5px solid pink': '0px'}}>
     <img
       src={`${url}?w=164&h=164&fit=crop&auto=format`}
       srcSet={`${url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}

@@ -48,7 +48,7 @@ return (
             </Stack>
           <ImageList sx={{ width: '100%' }} cols={3} rowHeight={700}>
             {album.images.map((image, index) => (
-              <ImageListItem >
+              <ImageListItem key={`${image.id}-${index}-modal`}>
                 <Button variant="contained" id={index} onClick={e => deleteClick(e)} aria-label="delete">
                     <DeleteIcon />
                 </Button>
